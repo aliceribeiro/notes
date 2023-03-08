@@ -20,6 +20,7 @@ module.exports = {
       gray: {
         700: "#8A8E9B",
         600: "#D9D9D9",
+        500: "E9E9E9",
         400: "#F2F2F2",
       },
       caramel: {
