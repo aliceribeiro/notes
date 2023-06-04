@@ -1,11 +1,24 @@
+import { FormEvent, useState } from "react";
 import { NotePencil, EnvelopeSimple, Lock } from "phosphor-react";
 import { Button } from "../../components/Button";
 import { Heading } from "../../components/Heading";
 import { TextInput } from "../../components/TextInput";
 import { Text } from "../../components/Text";
 import LoginImage from "../../assets/LoginImage";
+import axios from "axios";
 
 export function Signin() {
+  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    await axios.post("/auth", {
+      email: "alice@gmail.com",
+      senha: "1234",
+    });
+    setIsUserSignedIn(true);
+  }
 
   return (
     <div className="w-screen h-screen flex">
@@ -21,7 +34,12 @@ export function Signin() {
           </Text>
         </header>
 
-        <form onSubmit={() => alert("Formulário enviado")} className="flex flex-col gap-4 items-stretch w-full max-w-sm mt-10">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-4 items-stretch w-full max-w-sm mt-10"
+        >
+          {isUserSignedIn && <Text>Login realizado!</Text>}
+
           <label htmlFor="email">
             <Text className="text-caramel-700 font-semibold">
               Endereço de e-mail
@@ -63,9 +81,7 @@ export function Signin() {
             </a>
           </Text>
 
-          <Button type="submit">
-            Entrar
-          </Button>
+          <Button type="submit">Entrar</Button>
         </form>
 
         <footer className="flex flex-col gap-4 items-center w-full max-w-sm mt-10">
