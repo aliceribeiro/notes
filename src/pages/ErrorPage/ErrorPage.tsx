@@ -1,4 +1,4 @@
-import { useNavigate, useRouteError } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Heading } from "../../components/Heading";
 import { Text } from "../../components/Text";
 import { Button } from "../../components/Button";
@@ -6,9 +6,6 @@ import { ROUTES } from "../../helpers/routes";
 import NotFound from "../../assets/illustrations/NotFound";
 
 export function ErrorPage() {
-  const error = useRouteError();
-  console.log(error);
-
   const navigate = useNavigate();
 
   return (
@@ -17,7 +14,7 @@ export function ErrorPage() {
         <Heading className="text-caramel-700">Oops!</Heading>
         <NotFound />
         <Text className="text-gray-700">Página não encontrada</Text>
-        <Button onClick={() => navigate(ROUTES.BASE)}>Voltar para o Login</Button>
+        <Button.Primary onClick={() => navigate(ROUTES.BASE)}>Voltar para o Login</Button.Primary>
       </div>
     </div>
   );
