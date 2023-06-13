@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "env-cmd -f .env.config vite",
+    "build": "env-cmd -f .env.config tsc && vite build --mode config",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -19,11 +19,12 @@
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
+    "firebase": "^9.22.2",
     "msw-storybook-addon": "^1.8.0",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.12.1"
+    "react-router-dom": "^6.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
@@ -44,6 +45,7 @@
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^8.3.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
