@@ -21,6 +21,7 @@ module.exports = {
   },
   rules: {
     "react/react-in-jsx-scope": "off",
+    "react/jsx-key": "off",
     "max-len": ["warn", { code: 150, ignoreRegExpLiterals: true, tabWidth: 2 }],
     "no-console": "warn"
   }

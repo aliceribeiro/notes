@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent, waitFor } from "@storybook/testing-library";
 import { rest } from "msw";
-import { Signin } from ".";
+import { Signin } from "../../pages/Signin";
 
 export default {
   title: "Pages/SignIn",

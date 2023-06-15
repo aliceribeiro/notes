@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Sidebar } from "./Sidebar";
 import { Lock } from "phosphor-react";
+import { Sidebar } from "../../components/Sidebar";
 
 export default {
   title: "Components/Sidebar",

@@ -9,12 +9,7 @@ export interface HeadingProps {
   className?: string;
 }
 
-export function Heading({
-  size = "md",
-  children,
-  asChild,
-  className,
-}: HeadingProps) {
+export function Heading({ size = "md", children, asChild, className }: HeadingProps) {
   const Comp = asChild ? Slot : "h2";
 
   return (
@@ -24,7 +19,7 @@ export function Heading({
         {
           "text-lg": size === "sm",
           "text-xl": size === "md",
-          "text-2xl": size === "lg",
+          "text-2xl": size === "lg"
         },
         className
       )}

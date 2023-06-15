@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { EnvelopeSimple } from "phosphor-react";
-import { TextInput, TextInputRootProps } from "./TextInput";
+import { TextInput, TextInputRootProps } from "../../components/TextInput";
 
 export default {
   title: "Components/TextInput",
@@ -10,22 +10,22 @@ export default {
       <TextInput.Icon>
         <EnvelopeSimple />
       </TextInput.Icon>,
-      <TextInput.Input placeholder="Placeholder text" type="emai" />,
-    ],
+      <TextInput.Input placeholder="Placeholder text" type="emai" />
+    ]
   },
   argTypes: {
     children: {
       table: {
-        disable: true,
-      },
-    },
-  },
+        disable: true
+      }
+    }
+  }
 } as Meta<TextInputRootProps>;
 
 export const Default: StoryObj<TextInputRootProps> = {};
 
 export const WithoutIcon: StoryObj<TextInputRootProps> = {
-    args: {
-        children: <TextInput.Input placeholder="Placeholder text" type="emai" />
-    }
+  args: {
+    children: <TextInput.Input placeholder="Placeholder text" type="emai" />
+  }
 };
