@@ -8,6 +8,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../helpers/routes";
 import LoginImage from "../../assets/illustrations/LoginImage";
 import { AuthGoogleContext } from "../../contexts/authGoogle";
+import { Separator } from "../../components/Separator";
 
 const version = import.meta.env.VITE_VERSION;
 
@@ -77,13 +78,13 @@ export function Signin() {
             <Button.Primary type="submit">Entrar</Button.Primary>
           </form>
 
-          <p>ou</p>
-          <Button.Secondary onClick={loginGoogle} className="w-full max-w-sm flex justify-center items-center gap-4 h-12">
-            <GoogleLogo size={32} weight="fill" />
-            Entrar com o Google
-          </Button.Secondary>
-          <footer className="flex flex-col gap-4 items-center w-full max-w-sm mt-10">
-            <Text asChild size="sm">
+          <footer className="w-full max-w-sm flex flex-col gap-4">
+            <Separator.Text text="ou" className="mt-3" />
+            <Button.Secondary onClick={loginGoogle} className="w-full max-w-sm flex justify-center items-center gap-4 h-12">
+              <GoogleLogo size={32} weight="fill" />
+              Entrar com o Google
+            </Button.Secondary>
+            <Text asChild size="sm" className="flex flex-col items-center">
               <a href="#" className="text-caramel-700 underline hover:text-caramel-600">
                 Não possui conta? Crie uma agora!
               </a>
