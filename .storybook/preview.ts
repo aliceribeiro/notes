@@ -3,7 +3,7 @@ import { initialize, mswDecorator } from "msw-storybook-addon";
 import "../src/styles/global.css";
 
 initialize({
-  onUnhandledRequest: "bypass",
+  onUnhandledRequest: "bypass"
 });
 
 export const decorators = [mswDecorator];
@@ -13,10 +13,20 @@ export const parameters = {
   controls: {
     matchers: {
       color: /(background|color)$/i,
-      date: /Date$/,
-    },
+      date: /Date$/
+    }
   },
-  docs: {
-    theme: themes.dark,
-  },
+  backgrounds: {
+    default: "dark",
+    values: [
+      {
+        name: "dark",
+        value: "#333"
+      },
+      {
+        name: "light",
+        value: "#f2f2f2"
+      }
+    ]
+  }
 };

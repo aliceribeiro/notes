@@ -4,7 +4,13 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended"
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -22,7 +28,14 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off",
     "react/jsx-key": "off",
-    "max-len": ["warn", { code: 150, ignoreRegExpLiterals: true, tabWidth: 2 }],
+    "max-len": [
+      "warn",
+      {
+        code: 150,
+        ignoreRegExpLiterals: true,
+        tabWidth: 2
+      }
+    ],
     "no-console": "warn"
   }
 };
