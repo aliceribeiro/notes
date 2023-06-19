@@ -1,4 +1,4 @@
-import { AuthGoogleProvider } from "./contexts/authGoogle";
+import { AuthGoogleProvider } from "./contexts/auth";
 import { AppRoutes } from "./routes/routes";
 import "./styles/global.css";
 
