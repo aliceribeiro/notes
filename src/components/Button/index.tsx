@@ -1,5 +1,4 @@
 import { ButtonHTMLAttributes, ReactElement, ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { Slot } from "@radix-ui/react-slot";
 import { clsx } from "clsx";
 
@@ -8,10 +7,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
 }
 
-export interface LinkButtonProps {
+export interface LinkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactElement;
   label: string;
-  navigateTo: string;
+  navigateTo?: string;
 }
 
 function ButtonRoot({ children, asChild, className, ...props }: ButtonProps) {
@@ -20,7 +19,7 @@ function ButtonRoot({ children, asChild, className, ...props }: ButtonProps) {
   return (
     <Comp
       className={clsx(
-        "py-3 px-4 rounded font-semibold text-sm w-full transition-colors hover:bg-caramel-600 focus:ring-2 ring-caramel-700",
+        "w-full rounded px-4 py-3 text-sm font-semibold ring-caramel-700 transition-colors hover:bg-caramel-600 focus:ring-2",
         className
       )}
       {...props}
@@ -38,8 +37,8 @@ function ButtonPrimary({ children, asChild, className, ...props }: ButtonProps) 
   return (
     <Comp
       className={clsx(
-        "w-full py-3 px-4 rounded font-semibold text-gray-400 text-sm " +
-          "bg-caramel-700 transition-colors hover:bg-caramel-600 focus:ring-2 ring-caramel-700",
+        "w-full rounded px-4 py-3 text-sm font-semibold text-gray-400 " +
+          "bg-caramel-700 ring-caramel-700 transition-colors hover:bg-caramel-600 focus:ring-2",
         className
       )}
       {...props}
@@ -57,8 +56,8 @@ function ButtonSecondary({ children, asChild, className, ...props }: ButtonProps
   return (
     <Comp
       className={clsx(
-        "w-full py-3 px-4 rounded font-semibold text-caramel-700 text-sm " +
-          "bg-caramel-200-tp transition-colors hover:bg-caramel-200 focus:ring-2 ring-caramel-700",
+        "w-full rounded px-4 py-3 text-sm font-semibold text-caramel-700 " +
+          "bg-caramel-200-tp ring-caramel-700 transition-colors hover:bg-caramel-200 focus:ring-2",
         className
       )}
       {...props}
@@ -72,9 +71,9 @@ ButtonSecondary.displayName = "Button.Secondary";
 
 function LinkButton({ icon, label, navigateTo }: LinkButtonProps) {
   return (
-    <div className="flex items-center gap-2 py-1 px-2 my-1 rounded transition-colors hover:bg-gray-600 focus:ring-2 ring-caramel-700 cursor-pointer">
+    <div className="my-1 flex cursor-pointer items-center gap-2 rounded px-2 py-1 ring-caramel-700 transition-colors hover:bg-gray-600 focus:ring-2">
       <>{icon}</>
-      <Link to={navigateTo}>{label}</Link>
+      <a href={navigateTo}>{label}</a>
     </div>
   );
 }

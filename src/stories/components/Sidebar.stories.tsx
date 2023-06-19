@@ -1,19 +1,19 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Lock } from "phosphor-react";
-import { Sidebar } from "../../components/Sidebar";
+import { Sidebar, SidebarProps } from "../../components/Sidebar";
 
 export default {
   title: "Components/Sidebar",
   component: Sidebar,
   args: {
-    children: (
-      <>
-        <Lock />
-        <span>Item 1</span>
-      </>
-    )
+    hanldeExit: () => console.log("Cliquei em sair")
   },
-  argTypes: {}
-} as Meta;
+  argTypes: {
+    children: {
+      table: {
+        disable: true
+      }
+    }
+  }
+} as Meta<SidebarProps>;
 
-export const Default: StoryObj = {};
+export const Default: StoryObj<SidebarProps> = {};
