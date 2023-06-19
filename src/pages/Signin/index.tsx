@@ -1,10 +1,11 @@
 import { FormEvent, useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { NotePencil, EnvelopeSimple, Lock, GoogleLogo } from "phosphor-react";
 import { Button } from "../../components/Button";
 import { Heading } from "../../components/Heading";
 import { TextInput } from "../../components/TextInput";
 import { Text } from "../../components/Text";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { ROUTES } from "../../helpers/routes";
 import LoginImage from "../../assets/illustrations/LoginImage";
 import { AuthGoogleContext } from "../../contexts/authGoogle";
@@ -24,8 +25,8 @@ export function Signin() {
     setIsUserSignedIn(true);
   }
 
-  async function loginGoogle() {
-    await signinGoogle();
+  function loginGoogle() {
+    signinGoogle();
   }
 
   if (signed) {
@@ -85,9 +86,9 @@ export function Signin() {
               Entrar com o Google
             </Button.Secondary>
             <Text asChild size="sm" className="flex flex-col items-center">
-              <a href="#" className="text-caramel-700 underline hover:text-caramel-600">
+              <Link to={ROUTES.REGISTER} className="text-caramel-700 underline hover:text-caramel-600">
                 Não possui conta? Crie uma agora!
-              </a>
+              </Link>
             </Text>
           </footer>
         </div>
