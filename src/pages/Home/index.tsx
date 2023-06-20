@@ -15,7 +15,7 @@ export function Home() {
   return (
     <div className="flex h-screen w-screen">
       <Sidebar username={userName.displayName} handleExit={logout} />
-      <div className="w-full">{pathname === ROUTES.HOME ? <Notes /> : <Outlet />}</div>
+      <div className="w-full bg-gray-400  p-8">{pathname === ROUTES.HOME ? <Notes /> : <Outlet />}</div>
     </div>
   );
 }

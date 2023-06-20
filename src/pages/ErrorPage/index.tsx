@@ -9,8 +9,8 @@ export function ErrorPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center bg-gray-400">
-      <div className="w-auto flex flex-col items-center gap-4">
+    <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-400">
+      <div className="flex w-auto flex-col items-center gap-4">
         <Heading className="text-caramel-700">Oops!</Heading>
         <NotFound />
         <Text className="text-gray-700">Página não encontrada</Text>
