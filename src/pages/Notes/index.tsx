@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Heading } from "../../components/Heading";
 import { Button } from "../../components/Button";
 import { Plus } from "phosphor-react";
 import { Card } from "../../components/Card";
+import { NewNotes } from "./NewNotes";
 
 export function Notes() {
+  const [newNote, setNewNote] = useState<boolean>(false);
+
   const renderContent = () => {
     const cards: JSX.Element[] = [];
 
@@ -13,7 +17,7 @@ export function Notes() {
           title={`Título ${i} `}
           date={"24 de abril de 2023"}
           category={"Categoria"}
-          text={"Lorem ipsum"}
+          text={"Lorem ipsum dolor sit amet, consectetur adipisicing."}
           handleDelete={() => console.log("Cliquei em delete", i)}
         />
       );
@@ -24,11 +28,20 @@ export function Notes() {
   };
 
   return (
-    <div className="h-full  bg-gray-400 p-8">
-      <Heading className="text-caramel-700">Página em construção</Heading>
-      <Button.Link icon={<Plus size={24} />} label="Nova nota" handleClick={() => console.log("Cliquei em nova nota")} />
+    <div className="flex h-full">
+      <div className={newNote ? "w-96 overflow-auto" : ""}>
+        <Heading size="lg" className="text-caramel-700">
+          Minhas notas
+        </Heading>
+        <Button.Link icon={<Plus size={24} />} label="Nova nota" handleClick={() => setNewNote(true)} />
 
-      <div className="mt-8 flex flex-wrap gap-4">{renderContent()}</div>
+        <div className="over mt-8 flex flex-wrap gap-4 pr-8">{renderContent()}</div>
+      </div>
+      {newNote && (
+        <div className="w-full border-l-2 border-gray-700  pl-8">
+          <NewNotes />
+        </div>
+      )}
     </div>
   );
 }

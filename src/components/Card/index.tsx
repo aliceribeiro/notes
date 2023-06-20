@@ -12,7 +12,7 @@ export interface CardProps {
 
 export function Card({ title, date, category, text, handleDelete }: CardProps) {
   return (
-    <div className="w-72 rounded bg-gray-600 p-4">
+    <div className="w-72 truncate rounded bg-gray-600 p-4">
       <div className="flex items-center justify-between text-caramel-700">
         <Heading className="">{title}</Heading>
         <Trash size={24} onClick={handleDelete} className="cursor-pointer" />
