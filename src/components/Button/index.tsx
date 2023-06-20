@@ -7,10 +7,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
 }
 
-export interface LinkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface LinkButtonProps {
   icon: ReactElement;
   label: string;
-  navigateTo?: string;
+  handleClick: () => void;
 }
 
 function ButtonRoot({ children, asChild, className, ...props }: ButtonProps) {
@@ -69,11 +69,14 @@ function ButtonSecondary({ children, asChild, className, ...props }: ButtonProps
 
 ButtonSecondary.displayName = "Button.Secondary";
 
-function LinkButton({ icon, label, navigateTo }: LinkButtonProps) {
+function LinkButton({ icon, label, handleClick: onClick }: LinkButtonProps) {
   return (
-    <div className="my-1 flex cursor-pointer items-center gap-2 rounded px-2 py-1 ring-caramel-700 transition-colors hover:bg-gray-600 focus:ring-2">
+    <div
+      className="my-1 flex cursor-pointer items-center gap-2 rounded px-2 py-1 ring-caramel-700 transition-colors hover:bg-gray-600 focus:ring-2"
+      onClick={onClick}
+    >
       <>{icon}</>
-      <a href={navigateTo}>{label}</a>
+      <span>{label}</span>
     </div>
   );
 }

@@ -1,12 +1,11 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Meta } from "@storybook/react";
 import { Sidebar, SidebarProps } from "../../components/Sidebar";
 
 export default {
   title: "Components/Sidebar",
   component: Sidebar,
-  args: {
-    hanldeExit: () => console.log("Cliquei em sair")
-  },
+  args: {},
   argTypes: {
     children: {
       table: {
@@ -16,4 +15,10 @@ export default {
   }
 } as Meta<SidebarProps>;
 
-export const Default: StoryObj<SidebarProps> = {};
+export const Default = () => {
+  return (
+    <Router>
+      <Sidebar handleExit={() => console.log("Cliquei em sair")} />
+    </Router>
+  );
+};
