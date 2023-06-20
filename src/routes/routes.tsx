@@ -5,6 +5,7 @@ import { Home } from "../pages/Home/Home";
 import { ErrorPage } from "../pages/ErrorPage/ErrorPage";
 import { ROUTES } from "../helpers/routes";
 import { Register } from "../pages/Register";
+import { Notes } from "../pages/Notes";
 
 export function AppRoutes() {
   return (
@@ -14,7 +15,9 @@ export function AppRoutes() {
         <Route path={ROUTES.BASE} element={<Signin />} />
         <Route path={ROUTES.REGISTER} element={<Register />} />
         <Route path={ROUTES.HOME} element={<PrivateRoutes />}>
-          <Route path={ROUTES.HOME} element={<Home />} />
+          <Route path={ROUTES.HOME} element={<Home />}>
+            <Route path={ROUTES.NOTES} element={<Notes />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
