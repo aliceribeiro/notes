@@ -14,7 +14,7 @@ const SelectItem = React.forwardRef(({ children, className, value, ref, ...props
   return (
     <SelectPrimitive.Item
       className={clsx(
-        "flex items-center gap-1 rounded px-2 py-1 text-[13px] text-black-600" +
+        "flex items-center gap-1 rounded p-3 text-[13px] text-black-600" +
           "data-[disabled]:pointer-events-none data-[highlighted]:bg-caramel-600 data-[highlighted]:text-gray-400  data-[highlighted]:outline-none",
         className
       )}
