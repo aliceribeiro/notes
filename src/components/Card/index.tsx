@@ -7,12 +7,13 @@ export interface CardProps {
   date: string;
   category: string;
   text: string;
+  handleClick: () => void;
   handleDelete: () => void;
 }
 
-export function Card({ title, date, category, text, handleDelete }: CardProps) {
+export function Card({ title, date, category, text, handleClick, handleDelete }: CardProps) {
   return (
-    <div className="w-72 truncate rounded bg-gray-600 p-4">
+    <div className="w-72 truncate rounded bg-gray-600 p-4" onClick={handleClick}>
       <div className="flex items-center justify-between text-caramel-700">
         <Heading className="">{title}</Heading>
         <Trash size={24} onClick={handleDelete} className="cursor-pointer" />
