@@ -5,6 +5,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, User } from "firebase/aut
 import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { app } from "../services/firebaseConfig";
 import { ROUTES } from "../helpers/routes";
+import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 
 interface AuthContextProps {
   signed: boolean;
@@ -20,6 +21,8 @@ interface AuthProviderProps {
 }
 
 const provider = new GoogleAuthProvider();
+
+const db = getFirestore(app);
 
 export const AuthContext = createContext<AuthContextProps>({
   signed: false,
@@ -46,6 +49,11 @@ export const AuthGoogleProvider = ({ children }: AuthProviderProps) => {
 
   const [loggedUser, setLoggedUser] = useState<User | null | string>(null);
 
+  const addUserIndDatabase = async (uid: string, userData: { email: string }) => {
+    const userCollectionRef = doc(collection(db, "users"), uid);
+    await setDoc(userCollectionRef, userData);
+  };
+
   function signin(email: string, password: string) {
     signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -71,6 +79,8 @@ export const AuthGoogleProvider = ({ children }: AuthProviderProps) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken ?? "";
         const user = result.user;
+        const userData = { email: user.email ?? "" };
+        addUserIndDatabase(user.uid, userData);
         setLoggedUser(user);
         sessionStorage.setItem("@AuthFirebase:token", token);
         sessionStorage.setItem("@AuthFirebase:user", JSON.stringify(user));
@@ -85,6 +95,9 @@ export const AuthGoogleProvider = ({ children }: AuthProviderProps) => {
   function signup(email: string, password: string) {
     createUserWithEmailAndPassword(email, password)
       .then((data) => {
+        const uid = data?.user.uid ?? "";
+        const userData = { email };
+        addUserIndDatabase(uid, userData);
         data?.user
           .getIdToken()
           .then((accessToken) => {
