@@ -5,12 +5,24 @@ import { Text } from "../../../components/Text";
 import { Select } from "../../../components/Select";
 import { TextInput } from "../../../components/TextInput";
 import { Button } from "../../../components/Button";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../contexts/auth";
 
 export function NewNotes() {
-  function handleSubmit(e: FormEvent) {
+  const [categories, setCategories] = useState<string[]>([]);
+  const [title, setTitle] = useState<string>("");
+  const [note, setNote] = useState<string>("");
+
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    console.log("Cliquei em submit");
+
+    const userId = sessionStorage.getItem("@AuthFirebase:userID") ?? "";
+    const newData = { categories: ["aaa"], title, note };
+
+    await updateDoc(doc(db, "users", userId), {
+      notes: arrayUnion(newData)
+    });
   }
 
   return (
@@ -27,11 +39,11 @@ export function NewNotes() {
         </label>
         <label htmlFor="title">
           <TextInput.Root>
-            <TextInput.Input type="text" id="title" placeholder="Título da nota" />
+            <TextInput.Input type="text" id="title" placeholder="Título da nota" onChange={(e) => setTitle(e.target.value)} />
           </TextInput.Root>
         </label>
         <label htmlFor="note">
-          <TextInput.TextArea placeholder="Escreva sua nota" />
+          <TextInput.TextArea placeholder="Escreva sua nota" onChange={(e) => setNote(e.target.value)} />
         </label>
 
         <div className="flex gap-3">
