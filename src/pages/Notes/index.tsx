@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Heading } from "../../components/Heading";
 import { Button } from "../../components/Button";
 import { CaretRight, Plus } from "phosphor-react";
@@ -6,35 +6,13 @@ import { Card } from "../../components/Card";
 import { NewNotes } from "./NewNotes";
 import { Text } from "../../components/Text";
 import { Separator } from "../../components/Separator";
-
-interface NotesProps {
-  title: string;
-  date: string;
-  category: string;
-  text: string;
-}
+import { AuthContext, Note } from "../../contexts/auth";
 
 export function Notes() {
+  const { notes } = useContext(AuthContext);
+
   const [newNote, setNewNote] = useState<boolean>(false);
-  const [noteClicked, setNoteClicked] = useState<NotesProps>({ title: "", date: "", category: "", text: "" });
-
-  const notes: NotesProps[] = [];
-
-  const throwContent = () => {
-    for (let i = 1; i < 12; i++) {
-      const note = {
-        title: `Título ${i}`,
-        date: new Date().toString(),
-        category: "Categoria",
-        text: "Lorem ipsum dolor sit amet, consectetur adipisicing."
-      };
-
-      notes.push(note);
-    }
-    return notes;
-  };
-
-  throwContent();
+  const [noteClicked, setNoteClicked] = useState<Note>({ title: "", date: "", categories: [""], note: "" });
 
   return (
     <div className="flex h-full">
@@ -45,19 +23,27 @@ export function Notes() {
         <Button.Link icon={<Plus size={24} />} label="Nova nota" handleClick={() => setNewNote(true)} />
 
         <div className="over mt-8 flex flex-wrap gap-4 pr-8">
-          {notes.map((note, index) => {
-            return (
-              <Card
-                key={index}
-                title={note.title}
-                date={note.date}
-                category={note.category}
-                text={note.text}
-                handleClick={() => setNoteClicked(note)}
-                handleDelete={() => console.log("Apaguei :>> ", note)}
-              />
-            );
-          })}
+          {notes.length === 0 ? (
+            // TODO: criar tela para conteúdo vazio
+            <p>Sem notas</p>
+          ) : (
+            <>
+              {notes.map((note, index) => {
+                return (
+                  <Card
+                    key={index}
+                    title={note.title}
+                    date={note.date ?? "Sem data informada"}
+                    // TODO: corrigir/refatorar essa parte de categorias
+                    category={note.categories[0]}
+                    text={note.note}
+                    handleClick={() => setNoteClicked(note)}
+                    handleDelete={() => console.log("Apaguei :>> ", note)}
+                  />
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
       {newNote && (
@@ -76,9 +62,9 @@ export function Notes() {
             <Card
               key={noteClicked.title}
               title={noteClicked.title}
-              date={noteClicked.date}
-              category={noteClicked.category}
-              text={noteClicked.text}
+              date={noteClicked.date ?? "Sem data informada"}
+              category={noteClicked.categories[0]}
+              text={noteClicked.note}
               handleClick={() => setNoteClicked(noteClicked)}
               handleDelete={() => console.log("Apaguei :>> ", noteClicked)}
             />
