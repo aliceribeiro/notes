@@ -7,12 +7,24 @@ import { NewNotes } from "./NewNotes";
 import { Text } from "../../components/Text";
 import { Separator } from "../../components/Separator";
 import { AuthContext, Note } from "../../contexts/auth";
+import { deleteNoteFromFirestore } from "../../services/notes";
 
 export function Notes() {
   const { notes } = useContext(AuthContext);
 
   const [newNote, setNewNote] = useState<boolean>(false);
   const [noteClicked, setNoteClicked] = useState<Note>({ title: "", date: "", categories: [""], note: "" });
+  const [clickedNoteIndex, setClickedNoteIndex] = useState<number>(-1);
+
+  const deleteNote = (index: number) => {
+    deleteNoteFromFirestore(index)
+      .then(() => {
+        alert("Item excluído com sucesso!");
+      })
+      .catch((error) => {
+        throw new Error("Erro ao excluir item:", error);
+      });
+  };
 
   return (
     <div className="flex h-full">
@@ -37,8 +49,10 @@ export function Notes() {
                     // TODO: corrigir/refatorar essa parte de categorias
                     category={note.categories[0]}
                     text={note.note}
-                    handleClick={() => setNoteClicked(note)}
-                    handleDelete={() => console.log("Apaguei :>> ", note)}
+                    handleClick={() => {
+                      setNoteClicked(note), setClickedNoteIndex(index);
+                    }}
+                    handleDelete={() => deleteNote(index)}
                   />
                 );
               })}
@@ -66,7 +80,7 @@ export function Notes() {
               category={noteClicked.categories[0]}
               text={noteClicked.note}
               handleClick={() => setNoteClicked(noteClicked)}
-              handleDelete={() => console.log("Apaguei :>> ", noteClicked)}
+              handleDelete={() => deleteNote(clickedNoteIndex)}
             />
           </div>
         </div>
