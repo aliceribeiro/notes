@@ -46,8 +46,7 @@ export function Notes() {
                     key={index}
                     title={note.title}
                     date={note.date ?? "Sem data informada"}
-                    // TODO: corrigir/refatorar essa parte de categorias
-                    category={note.categories[0]}
+                    categories={note.categories}
                     text={note.note}
                     handleClick={() => {
                       setNoteClicked(note), setClickedNoteIndex(index);
@@ -77,7 +76,7 @@ export function Notes() {
               key={noteClicked.title}
               title={noteClicked.title}
               date={noteClicked.date ?? "Sem data informada"}
-              category={noteClicked.categories[0]}
+              categories={noteClicked.categories}
               text={noteClicked.note}
               handleClick={() => setNoteClicked(noteClicked)}
               handleDelete={() => deleteNote(clickedNoteIndex)}

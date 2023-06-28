@@ -1,17 +1,18 @@
-import { Tag, Trash } from "phosphor-react";
+import { Plus, Trash } from "phosphor-react";
 import { Heading } from "../Heading";
 import { Text } from "../Text";
+import { Tag } from "../Tag";
 
 export interface CardProps {
   title: string;
   date: string;
-  category: string;
+  categories: string[];
   text: string;
   handleClick: () => void;
   handleDelete: () => void;
 }
 
-export function Card({ title, date, category, text, handleClick, handleDelete }: CardProps) {
+export function Card({ title, date, categories, text, handleClick, handleDelete }: CardProps) {
   return (
     <div className="w-72 truncate rounded bg-gray-600 p-4" onClick={handleClick}>
       <div className="flex items-center justify-between text-caramel-700">
@@ -22,8 +23,13 @@ export function Card({ title, date, category, text, handleClick, handleDelete }:
         {date}
       </Text>
       <div className="flex items-center gap-2 py-2 text-caramel-700">
-        <Tag size={24} className="rotate-90" />
-        <Text>{category}</Text>
+        {categories.map((category, index) => {
+          return <Tag key={index}>{category}</Tag>;
+        })}
+        <Tag>
+          <Plus size={16} />
+          <Text size="sm">Nova categoria</Text>
+        </Tag>
       </div>
       <Text className="text-black-600">{text}</Text>
     </div>

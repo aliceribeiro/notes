@@ -7,7 +7,7 @@ export default {
   args: {
     title: "Título",
     date: "24 de abril de 2023",
-    category: "Categoria",
+    categories: ["Categoria"],
     text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
     handleDelete: () => console.log("Cliquei na lixeira")
   },
