@@ -32,7 +32,7 @@ export interface Note {
   title: string;
   categories: string[];
   note: string;
-  date?: string;
+  lastUpdate: string;
 }
 
 const provider = new GoogleAuthProvider();

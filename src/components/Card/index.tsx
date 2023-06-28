@@ -2,6 +2,8 @@ import { Plus, Trash } from "phosphor-react";
 import { Heading } from "../Heading";
 import { Text } from "../Text";
 import { Tag } from "../Tag";
+import { format } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 
 export interface CardProps {
   title: string;
@@ -13,14 +15,16 @@ export interface CardProps {
 }
 
 export function Card({ title, date, categories, text, handleClick, handleDelete }: CardProps) {
+  const formattedDate = date ? format(new Date(date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR }) : "Sem data informada";
+
   return (
     <div className="w-72 truncate rounded bg-gray-600 p-4" onClick={handleClick}>
       <div className="flex items-center justify-between text-caramel-700">
-        <Heading className="">{title}</Heading>
+        <Heading>{title}</Heading>
         <Trash size={24} onClick={handleDelete} className="cursor-pointer" />
       </div>
       <Text size="sm" className="text-gray-700">
-        {date}
+        {formattedDate}
       </Text>
       <div className="flex items-center gap-2 py-2 text-caramel-700">
         {categories.map((category, index) => {

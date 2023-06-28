@@ -18,7 +18,7 @@ export function NewNotes() {
     e.preventDefault();
 
     const userId = sessionStorage.getItem("@AuthFirebase:userID") ?? "";
-    const newData = { categories: ["aaa"], title, note };
+    const newData = { categories: ["aaa"], title, note, lastUpdate: new Date().toISOString() };
 
     await updateDoc(doc(db, "users", userId), {
       notes: arrayUnion(newData)

@@ -13,7 +13,7 @@ export function Notes() {
   const { notes } = useContext(AuthContext);
 
   const [newNote, setNewNote] = useState<boolean>(false);
-  const [noteClicked, setNoteClicked] = useState<Note>({ title: "", date: "", categories: [""], note: "" });
+  const [noteClicked, setNoteClicked] = useState<Note>({ title: "", lastUpdate: "", categories: [""], note: "" });
   const [clickedNoteIndex, setClickedNoteIndex] = useState<number>(-1);
 
   const deleteNote = (index: number) => {
@@ -45,7 +45,7 @@ export function Notes() {
                   <Card
                     key={index}
                     title={note.title}
-                    date={note.date ?? "Sem data informada"}
+                    date={note.lastUpdate}
                     categories={note.categories}
                     text={note.note}
                     handleClick={() => {
@@ -75,7 +75,7 @@ export function Notes() {
             <Card
               key={noteClicked.title}
               title={noteClicked.title}
-              date={noteClicked.date ?? "Sem data informada"}
+              date={noteClicked.lastUpdate}
               categories={noteClicked.categories}
               text={noteClicked.note}
               handleClick={() => setNoteClicked(noteClicked)}
