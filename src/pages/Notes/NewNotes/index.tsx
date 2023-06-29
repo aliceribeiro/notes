@@ -1,16 +1,23 @@
-import { CaretRight } from "phosphor-react";
+import { CaretRight, Plus, X } from "phosphor-react";
 import { Heading } from "../../../components/Heading";
 import { Separator } from "../../../components/Separator";
 import { Text } from "../../../components/Text";
-import { Select } from "../../../components/Select";
 import { TextInput } from "../../../components/TextInput";
 import { Button } from "../../../components/Button";
 import { FormEvent, useState } from "react";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../contexts/auth";
+import { Tag } from "../../../components/Tag";
+import { Modal } from "../../../components/Modal";
+import clsx from "clsx";
 
-export function NewNotes() {
+interface NewNotesProps {
+  handleCancel: () => void;
+}
+
+export function NewNotes({ handleCancel }: NewNotesProps) {
   const [categories, setCategories] = useState<string[]>([]);
+  const [currentCategory, setCurrentCategory] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [note, setNote] = useState<string>("");
 
@@ -18,11 +25,52 @@ export function NewNotes() {
     e.preventDefault();
 
     const userId = sessionStorage.getItem("@AuthFirebase:userID") ?? "";
-    const newData = { categories: ["aaa"], title, note, lastUpdate: new Date().toISOString() };
+    const newData = { categories, title, note, lastUpdate: new Date().toISOString() };
 
     await updateDoc(doc(db, "users", userId), {
       notes: arrayUnion(newData)
     });
+  }
+
+  function addCategory() {
+    const newCategory = [...categories];
+    newCategory.push(currentCategory);
+    setCategories(newCategory);
+  }
+
+  function removeCategory(index: number) {
+    const updatedCategories = [...categories];
+    updatedCategories.splice(index, 1);
+    setCategories(updatedCategories);
+  }
+
+  function addCategoriesContent() {
+    return (
+      <Modal.Root
+        triggerBtn={
+          <div
+            className={clsx(
+              "my-1 flex cursor-pointer items-center gap-2 rounded bg-feedback-graySoft " +
+                "px-2 py-1 ring-caramel-700 transition-colors hover:bg-feedback-grayLight focus:ring-2"
+            )}
+          >
+            <Plus size={16} />
+            <p>Adicionar categoria</p>
+          </div>
+        }
+      >
+        <Modal.Dialog
+          title="Adicionar categoria"
+          description="Qual categoria você gostaria de adicionar à sua nota?"
+          submitBtnText="Salvar"
+          handleSubmit={() => addCategory()}
+        >
+          <TextInput.Root>
+            <TextInput.Input type="text" id="category" placeholder="Escreva aqui" onChange={(e) => setCurrentCategory(e.target.value)} />
+          </TextInput.Root>
+        </Modal.Dialog>
+      </Modal.Root>
+    );
   }
 
   return (
@@ -34,9 +82,27 @@ export function NewNotes() {
       <Separator.Line />
       <Heading className="mt-4 text-caramel-700">Adicionar nova nota</Heading>
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3">
-        <label htmlFor="category">
-          <Select />
-        </label>
+        <div className="flex flex-wrap gap-4">
+          {categories.map((category, index) => {
+            return (
+              <Tag key={index} className="text-caramel-700">
+                <div className="flex items-center gap-3">
+                  {category}
+                  <div
+                    onClick={() => removeCategory(index)}
+                    className={clsx(
+                      "cursor-pointer rounded-full p-1 text-feedback-gray hover:bg-feedback-grayLight " +
+                        "focus:shadow-[0_0_0_2px] focus:shadow-feedback-grayLight focus:outline-none"
+                    )}
+                  >
+                    <X size={12} />
+                  </div>
+                </div>
+              </Tag>
+            );
+          })}
+          {addCategoriesContent()}
+        </div>
         <label htmlFor="title">
           <TextInput.Root>
             <TextInput.Input type="text" id="title" placeholder="Título da nota" onChange={(e) => setTitle(e.target.value)} />
@@ -47,7 +113,7 @@ export function NewNotes() {
         </label>
 
         <div className="flex gap-3">
-          <Button.Secondary>Cancelar</Button.Secondary>
+          <Button.Secondary onClick={handleCancel}>Cancelar</Button.Secondary>
           <Button.Primary type="submit">Salvar</Button.Primary>
         </div>
       </form>

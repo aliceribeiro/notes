@@ -24,11 +24,12 @@ function ModalRoot({ children, triggerBtn }: ModalRootProps) {
 ModalRoot.displayName = "Modal.Root";
 
 export interface ModalDialogProps extends ModalDefaultProps {
-  fields: JSX.Element;
+  children: JSX.Element;
   submitBtnText: string;
+  handleSubmit: () => void;
 }
 
-function ModalDialog({ title, description, fields, submitBtnText }: ModalDialogProps) {
+function ModalDialog({ title, description, children, submitBtnText, handleSubmit }: ModalDialogProps) {
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-black-light" />
@@ -41,7 +42,7 @@ function ModalDialog({ title, description, fields, submitBtnText }: ModalDialogP
       >
         <Dialog.Title className="text-md">{title}</Dialog.Title>
         <Dialog.Description className="mb-5 mt-3 text-sm leading-normal text-gray-700">{description}</Dialog.Description>
-        <div>{fields}</div>
+        <div>{children}</div>
         <div className="mt-6 flex justify-end">
           <Dialog.Close asChild>
             <button
@@ -49,6 +50,7 @@ function ModalDialog({ title, description, fields, submitBtnText }: ModalDialogP
                 "inline-flex h-9 items-center justify-center rounded bg-feedback-successLight px-4 font-bold leading-none text-feedback-success " +
                   "cursor-pointer hover:bg-feedback-successLight focus:shadow-[0_0_0_2px] focus:shadow-feedback-successLight focus:outline-none"
               )}
+              onClick={handleSubmit}
             >
               {submitBtnText}
             </button>

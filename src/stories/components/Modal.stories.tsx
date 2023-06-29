@@ -41,18 +41,18 @@ export const Dialog: StoryObj<ModalRootProps> = {
       <Modal.Dialog
         title="Título da modal"
         description="Descrição da modal"
+        handleSubmit={() => console.log("Cliquei em Salvar")}
         submitBtnText="Salvar"
-        fields={
-          <label htmlFor="text" className="flex">
-            <Text className="font-semibold text-caramel-700" size="sm">
-              Preencha o campo
-            </Text>
-            <TextInput.Root>
-              <TextInput.Input type="text" id="text" placeholder="" onChange={(e) => console.log(e.target.value)} />
-            </TextInput.Root>
-          </label>
-        }
-      />
+      >
+        <label htmlFor="text" className="flex">
+          <Text className="font-semibold text-caramel-700" size="sm">
+            Preencha o campo
+          </Text>
+          <TextInput.Root>
+            <TextInput.Input type="text" id="text" placeholder="" onChange={(e) => console.log(e.target.value)} />
+          </TextInput.Root>
+        </label>
+      </Modal.Dialog>
     )
   },
   argTypes: {
