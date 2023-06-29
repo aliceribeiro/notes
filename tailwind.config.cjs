@@ -16,7 +16,8 @@ module.exports = {
       white: "#FFF",
       black: {
         700: "#2F2E41",
-        600: "#3F3D56"
+        600: "#3F3D56",
+        light: "#00000070"
       },
       gray: {
         700: "#8A8E9B",
@@ -29,6 +30,20 @@ module.exports = {
         600: "#BE835B",
         200: "#DBBA87",
         "200-tp": "#DBBA87a3"
+      },
+      feedback: {
+        successSoft: "#DDF3E4",
+        successLight: "#CCEBD7",
+        success: "#18794E",
+        errorSoft: "#F9E6E5",
+        errorLight: "#F5DAD8",
+        error: "#B84036",
+        graySoft: "#EEEDEF",
+        grayLight: "#E9E8EA",
+        gray: "#6F6E77",
+        warningSoft: "#D8C8BE",
+        warningLight: "#DABBA7",
+        warning: "#C7692A"
       }
     },
     extend: {
