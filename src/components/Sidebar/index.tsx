@@ -18,7 +18,7 @@ export function Sidebar({ username, handleExit }: SidebarProps) {
   };
 
   return (
-    <div className="flex min-w-max flex-col justify-between bg-gray-400 p-4 text-gray-700">
+    <div className="flex min-w-max flex-col justify-between bg-feedback-grayLight p-4 text-gray-700">
       <div className="flex flex-col gap-2">
         <Heading size="sm">{username ? `Olá, ${username} 👋` : "Olá!"}</Heading>
         <Separator.Line />
