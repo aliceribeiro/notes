@@ -8,6 +8,7 @@ import { Text } from "../../components/Text";
 import { Separator } from "../../components/Separator";
 import { AuthContext, Note } from "../../contexts/auth";
 import { deleteNoteFromFirestore } from "../../services/notes";
+import clsx from "clsx";
 
 export function Notes() {
   const { notes } = useContext(AuthContext);
@@ -29,7 +30,7 @@ export function Notes() {
 
   return (
     <div className="flex h-full">
-      <div className={newNote ? "w-96 overflow-auto" : ""}>
+      <div className="mr-1 w-96 overflow-y-hidden scrollbar-thin scrollbar-track-feedback-grayLight scrollbar-thumb-gray-600 hover:overflow-y-auto">
         <Heading size="lg" className="text-caramel-700">
           Minhas notas
         </Heading>
@@ -63,6 +64,7 @@ export function Notes() {
                       setNewNote(false);
                     }}
                     handleDelete={() => deleteNote(index)}
+                    className={clsx({ "bg-gray-600": noteClicked.title === note.title })}
                   />
                 );
               })}
