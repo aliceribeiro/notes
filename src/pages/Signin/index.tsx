@@ -1,8 +1,7 @@
 import { FormEvent, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { NotePencil, EnvelopeSimple, Lock, GoogleLogo } from "phosphor-react";
+import { EnvelopeSimple, GoogleLogo, LockKey } from "phosphor-react";
 import { Button } from "../../components/Button";
-import { Heading } from "../../components/Heading";
 import { TextInput } from "../../components/TextInput";
 import { Text } from "../../components/Text";
 import { Navigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import { ROUTES } from "../../helpers/routes";
 import { AuthContext } from "../../contexts/auth";
 import { Separator } from "../../components/Separator";
 import LoginImage from "../../assets/illustrations/LoginImage";
+import { ColorfulLogoDefault as Logo } from "../../assets/ColorfulLogoDefault";
 
 const version = import.meta.env.VITE_VERSION;
 
@@ -33,20 +33,18 @@ export function Signin() {
   } else {
     return (
       <div className="flex h-screen w-screen">
-        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-caramel-200-tp">
+        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-gradient-to-r from-primary to-secondary">
           <LoginImage />
-          <div className="text-caramel-200-tp">{version ? version : ""}</div>
         </div>
-        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-gray-400">
-          <header className="max-w-sm">
-            <NotePencil size={42} className="text-caramel-700" />
-            <Heading className="text-caramel-700">Olá 👋</Heading>
-            <Text className="text-gray-700">Insira as informações que você cadastrou ao se registrar.</Text>
+        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-background-clearLight">
+          <Logo />
+          <header className="mt-8 max-w-sm">
+            <Text className="text-dark-heavy">Insira as informações que você cadastrou ao se registrar na plataforma.</Text>
           </header>
 
           <form onSubmit={handleSubmit} className="mt-10 flex w-full max-w-sm flex-col items-stretch gap-4">
             <label htmlFor="email">
-              <Text className="font-semibold text-caramel-700">Endereço de e-mail</Text>
+              <Text className="font-semibold text-dark-heavy">Endereço de e-mail</Text>
               <TextInput.Root>
                 <TextInput.Icon>
                   <EnvelopeSimple />
@@ -57,10 +55,10 @@ export function Signin() {
             </label>
 
             <label htmlFor="password">
-              <Text className="font-semibold text-caramel-700">Senha</Text>
+              <Text className="font-semibold text-dark-heavy">Senha</Text>
               <TextInput.Root>
                 <TextInput.Icon>
-                  <Lock />
+                  <LockKey />
                 </TextInput.Icon>
 
                 <TextInput.Input type="password" id="password" placeholder="Digite sua senha" onChange={(e) => setPassword(e.target.value)} />
@@ -68,7 +66,7 @@ export function Signin() {
             </label>
 
             <Text asChild size="sm" className="mb-6 text-end">
-              <a href="#" className="text-caramel-700 underline hover:text-caramel-600">
+              <a href="#" className="text-dark-heavy underline hover:text-secondary">
                 Esqueceu a senha?
               </a>
             </Text>
@@ -83,11 +81,12 @@ export function Signin() {
               Entrar com o Google
             </Button.Secondary>
             <Text asChild size="sm" className="flex flex-col items-center">
-              <Link to={ROUTES.REGISTER} className="text-caramel-700 underline hover:text-caramel-600">
+              <Link to={ROUTES.REGISTER} className="text-dark-heavy underline hover:text-secondary">
                 Não possui conta? Crie uma agora!
               </Link>
             </Text>
           </footer>
+          <div className="absolute bottom-1 mr-1 self-end text-gray-soft">{version ? version : ""}</div>
         </div>
       </div>
     );

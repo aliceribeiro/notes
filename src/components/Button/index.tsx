@@ -18,10 +18,7 @@ function ButtonRoot({ children, asChild, className, ...props }: ButtonProps) {
 
   return (
     <Comp
-      className={clsx(
-        "w-full rounded px-4 py-3 text-sm font-semibold ring-caramel-700 transition-colors hover:bg-caramel-600 focus:ring-2",
-        className
-      )}
+      className={clsx("w-full rounded px-4 py-3 text-sm font-semibold ring-primary transition-colors hover:bg-secondary focus:ring-2", className)}
       {...props}
     >
       {children}
@@ -37,8 +34,8 @@ function ButtonPrimary({ children, asChild, className, ...props }: ButtonProps) 
   return (
     <Comp
       className={clsx(
-        "w-full rounded px-4 py-3 text-sm font-semibold text-gray-400 " +
-          "bg-caramel-700 ring-caramel-700 transition-colors hover:bg-caramel-600 focus:ring-2",
+        "w-full rounded px-4 py-3 text-sm font-semibold text-gray-light " +
+          "bg-primary ring-primary transition-colors hover:bg-secondary focus:ring-2",
         className
       )}
       {...props}
@@ -56,8 +53,8 @@ function ButtonSecondary({ children, asChild, className, ...props }: ButtonProps
   return (
     <Comp
       className={clsx(
-        "w-full rounded px-4 py-3 text-sm font-semibold text-caramel-700 " +
-          "bg-caramel-200-tp ring-caramel-700 transition-colors hover:bg-caramel-200 focus:ring-2",
+        "w-full rounded border-2 px-4 py-3 text-sm font-semibold text-primary " +
+          "bg-background-clearSoft ring-primary transition-colors hover:bg-background-clearLight focus:ring-2",
         className
       )}
       {...props}
@@ -72,7 +69,7 @@ ButtonSecondary.displayName = "Button.Secondary";
 function LinkButton({ icon, label, handleClick: onClick }: LinkButtonProps) {
   return (
     <div
-      className="my-1 flex cursor-pointer items-center gap-2 rounded px-2 py-1 ring-caramel-700 transition-colors hover:bg-gray-600 focus:ring-2"
+      className="my-1 flex cursor-pointer items-center gap-2 rounded px-2 py-1 ring-primary transition-colors hover:bg-primary focus:ring-2"
       onClick={onClick}
     >
       <>{icon}</>

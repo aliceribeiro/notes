@@ -17,7 +17,7 @@ export interface SeparatorProps {
 }
 
 function SeparatorLine({ className }: SeparatorProps) {
-  return <SeparatorPrimitive.Root className={clsx("h-[1px] w-full bg-gray-700", className)} />;
+  return <SeparatorPrimitive.Root className={clsx("h-[1px] w-full bg-gray-heavy", className)} />;
 }
 
 SeparatorLine.displayName = "Separator.Line";
@@ -30,7 +30,7 @@ function SeparatorWithText({ text, className }: SeparatorTextProps) {
   return (
     <div className={clsx("flex items-center", className)}>
       <Separator.Line />
-      <span className="px-2 text-gray-700">{text}</span>
+      <span className="text-gray-bg-gray-heavy px-2">{text}</span>
       <Separator.Line />
     </div>
   );

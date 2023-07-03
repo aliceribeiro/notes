@@ -8,7 +8,7 @@ export interface TextInputRootProps {
 
 function TextInputRoot(props: TextInputRootProps) {
   return (
-    <div className={clsx("flex h-12 w-full items-center gap-3 rounded bg-gray-600 px-3 py-3 ring-caramel-700 focus-within:ring-2")}>
+    <div className={clsx("flex h-12 w-full items-center gap-3 rounded bg-gray-light px-3 py-3 ring-primary focus-within:ring-2")}>
       {props.children}
     </div>
   );
@@ -21,7 +21,7 @@ export interface TextInputIconProps {
 }
 
 function TextInputIcon(props: TextInputIconProps) {
-  return <Slot className="h-6 w-6 text-caramel-700">{props.children}</Slot>;
+  return <Slot className="h-6 w-6 text-primary">{props.children}</Slot>;
 }
 
 TextInputIcon.displayName = "TextInput.Icon";
@@ -29,7 +29,7 @@ TextInputIcon.displayName = "TextInput.Icon";
 export type TextInputInputProps = InputHTMLAttributes<HTMLInputElement>;
 
 function TextInputInput(props: TextInputInputProps) {
-  return <input className="flex-1 bg-transparent text-black-600 outline-none placeholder:text-gray-700" {...props} />;
+  return <input className="placeholder:text-gray-700 flex-1 bg-transparent text-dark-heavy outline-none" {...props} />;
 }
 
 TextInputInput.displayName = "TextInput.Input";
@@ -40,7 +40,7 @@ function TextAreaInput(props: TextAreaProps) {
   return (
     <textarea
       rows={7}
-      className="w-full flex-1 rounded bg-gray-600 p-3 text-black-600 outline-none ring-caramel-700 placeholder:text-gray-700 focus-within:ring-2"
+      className="placeholder:text-gray-700 w-full flex-1 rounded bg-gray-light p-3 text-dark-heavy outline-none ring-primary focus-within:ring-2"
       {...props}
     />
   );
