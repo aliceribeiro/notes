@@ -4,13 +4,22 @@ import { clsx } from "clsx";
 
 export interface TextInputRootProps {
   children: ReactNode;
+  isEmpty?: boolean;
+  errorMessage?: string;
 }
 
 function TextInputRoot(props: TextInputRootProps) {
   return (
-    <div className={clsx("flex h-12 w-full items-center gap-3 rounded bg-gray-light px-3 py-3 ring-primary focus-within:ring-2")}>
-      {props.children}
-    </div>
+    <>
+      <div
+        className={clsx("flex h-12 w-full items-center gap-3 rounded bg-gray-light px-3 py-3 ring-primary focus-within:ring-2", {
+          "border-2 border-feedback-error ring-feedback-error focus-within:ring-transparent": props.isEmpty === true
+        })}
+      >
+        {props.children}
+      </div>
+      {props.isEmpty && <p className="text-feedback-error">{props.errorMessage}</p>}
+    </>
   );
 }
 

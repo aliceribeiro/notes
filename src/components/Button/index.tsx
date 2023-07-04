@@ -1,10 +1,12 @@
 import { ButtonHTMLAttributes, ReactElement, ReactNode } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { clsx } from "clsx";
+import { CircleNotch } from "phosphor-react";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   asChild?: boolean;
+  loading?: boolean;
 }
 
 export interface LinkButtonProps {
@@ -28,19 +30,20 @@ function ButtonRoot({ children, asChild, className, ...props }: ButtonProps) {
 
 ButtonRoot.displayName = "Button.Root";
 
-function ButtonPrimary({ children, asChild, className, ...props }: ButtonProps) {
+function ButtonPrimary({ children, asChild, className, loading, ...props }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
 
   return (
     <Comp
       className={clsx(
-        "w-full rounded px-4 py-3 text-sm font-semibold text-gray-light " +
+        "flex w-full justify-center rounded px-4 py-3 text-sm font-semibold text-gray-light " +
           "bg-primary ring-primary transition-colors hover:bg-secondary focus:ring-2",
+        { "cursor-not-allowed bg-secondary": loading === true },
         className
       )}
       {...props}
     >
-      {children}
+      {loading ? <CircleNotch size={24} className="animate-spin text-gray-light" /> : children}
     </Comp>
   );
 }
@@ -54,7 +57,7 @@ function ButtonSecondary({ children, asChild, className, ...props }: ButtonProps
     <Comp
       className={clsx(
         "w-full rounded border-2 px-4 py-3 text-sm font-semibold text-primary " +
-          "bg-background-clearSoft ring-primary transition-colors hover:bg-background-clearLight focus:ring-2",
+          "bg-background-clearSoft ring-primary transition-colors hover:bg-background-clearLight",
         className
       )}
       {...props}

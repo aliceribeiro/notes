@@ -8,28 +8,46 @@ import { Navigate } from "react-router-dom";
 import { ROUTES } from "../../helpers/routes";
 import { AuthContext } from "../../contexts/auth";
 import { Separator } from "../../components/Separator";
-import LoginImage from "../../assets/illustrations/LoginImage";
 import { ColorfulLogoDefault as Logo } from "../../assets/ColorfulLogoDefault";
+import { isEmptyInput } from "../../helpers/utils";
+import LoginImage from "../../assets/illustrations/LoginImage";
 
 const version = import.meta.env.VITE_VERSION;
 
 export function Signin() {
   const { signin, signinGoogle, signed } = useContext(AuthContext);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [isEmailEmpty, setIsEmailEmpty] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>("");
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    signin(email, password);
+    if (formIsValid()) {
+      setIsLoading(true);
+      e.preventDefault();
+      signin(email, password);
+      setIsLoading(false);
+    }
   }
 
   function loginGoogle() {
     signinGoogle();
   }
 
+  function formIsValid() {
+    if (email.length === 0) {
+      setIsEmailEmpty(true);
+    }
+    if (password.length === 0) {
+      setIsPasswordEmpty(true);
+    }
+    return true;
+  }
+
   if (signed) {
-    return <Navigate to={ROUTES.HOME} />;
+    return <Navigate to={ROUTES.NOTES} />;
   } else {
     return (
       <div className="flex h-screen w-screen">
@@ -45,23 +63,41 @@ export function Signin() {
           <form onSubmit={handleSubmit} className="mt-10 flex w-full max-w-sm flex-col items-stretch gap-4">
             <label htmlFor="email">
               <Text className="font-semibold text-dark-heavy">Endereço de e-mail</Text>
-              <TextInput.Root>
+              <TextInput.Root isEmpty={isEmailEmpty} errorMessage="Informe o seu e-mail">
                 <TextInput.Icon>
                   <EnvelopeSimple />
                 </TextInput.Icon>
 
-                <TextInput.Input type="email" id="email" placeholder="Digite seu e-mail" onChange={(e) => setEmail(e.target.value)} />
+                <TextInput.Input
+                  type="email"
+                  id="email"
+                  placeholder="Digite seu e-mail"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setIsEmailEmpty(false);
+                  }}
+                  onBlur={(e) => setIsEmailEmpty(isEmptyInput(e.target.value))}
+                />
               </TextInput.Root>
             </label>
 
             <label htmlFor="password">
               <Text className="font-semibold text-dark-heavy">Senha</Text>
-              <TextInput.Root>
+              <TextInput.Root isEmpty={isPasswordEmpty} errorMessage="Informe sua senha">
                 <TextInput.Icon>
                   <LockKey />
                 </TextInput.Icon>
 
-                <TextInput.Input type="password" id="password" placeholder="Digite sua senha" onChange={(e) => setPassword(e.target.value)} />
+                <TextInput.Input
+                  type="password"
+                  id="password"
+                  placeholder="Digite sua senha"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setIsPasswordEmpty(false);
+                  }}
+                  onBlur={(e) => setIsPasswordEmpty(isEmptyInput(e.target.value))}
+                />
               </TextInput.Root>
             </label>
 
@@ -71,7 +107,9 @@ export function Signin() {
               </a>
             </Text>
 
-            <Button.Primary type="submit">Entrar</Button.Primary>
+            <Button.Primary type="submit" loading={isLoading}>
+              Entrar
+            </Button.Primary>
           </form>
 
           <footer className="flex w-full max-w-sm flex-col gap-4">
