@@ -1,6 +1,7 @@
 import { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { clsx } from "clsx";
+import { Text } from "../Text";
 
 export interface TextInputRootProps {
   children: ReactNode;
@@ -18,7 +19,11 @@ function TextInputRoot(props: TextInputRootProps) {
       >
         {props.children}
       </div>
-      {props.isEmpty && <p className="text-feedback-error">{props.errorMessage}</p>}
+      {props.isEmpty && (
+        <Text size="sm" className="text-feedback-error">
+          {props.errorMessage}
+        </Text>
+      )}
     </>
   );
 }

@@ -1,23 +1,41 @@
 import { FormEvent, useContext, useState } from "react";
-import { EnvelopeSimple, Lock } from "phosphor-react";
+import { EnvelopeSimple, LockKey } from "phosphor-react";
 import { Text } from "../../components/Text";
 import { TextInput } from "../../components/TextInput";
 import { Button } from "../../components/Button";
-import { Heading } from "../../components/Heading";
 import { Navigate } from "react-router-dom";
 import { ROUTES } from "../../helpers/routes";
 import { AuthContext } from "../../contexts/auth";
+import { ColorfulLogoDefault as Logo } from "../../assets/ColorfulLogoDefault";
+import { isEmptyInput } from "../../helpers/utils";
 import SignupImage from "../../assets/illustrations/Signup";
 
 export function Register() {
   const [email, setEmail] = useState<string>("");
+  const [isEmailEmpty, setIsEmailEmpty] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { signup, signed } = useContext(AuthContext);
 
   function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    signup(email, password);
+    if (formIsValid()) {
+      setIsLoading(true);
+      e.preventDefault();
+      signup(email, password);
+      setIsLoading(false);
+    }
+  }
+
+  function formIsValid() {
+    if (email.length === 0) {
+      setIsEmailEmpty(true);
+    }
+    if (password.length === 0 || password.length < 6) {
+      setIsPasswordEmpty(true);
+    }
+    return true;
   }
 
   if (signed) {
@@ -25,38 +43,58 @@ export function Register() {
   } else {
     return (
       <div className="flex h-screen w-screen">
-        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-gray-400">
-          <header className="max-w-sm">
-            <Heading className="text-caramel-700">Olá 👋</Heading>
-            <Text className="text-gray-700">Para criar sua conta é necessário preencher as segiuntes informações:</Text>
+        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-background-clearLight">
+          <Logo />
+          <header className="mt-8 max-w-sm">
+            <Text className="text-dark-heavy">Para criar sua conta é necessário preencher as segiuntes informações:</Text>
           </header>
           <form onSubmit={(e) => handleSubmit(e)} className="mt-10 flex w-full max-w-sm flex-col items-stretch gap-4">
             <label htmlFor="email">
-              <Text className="font-semibold text-caramel-700">Endereço de e-mail</Text>
-              <TextInput.Root>
+              <Text className="font-semibold text-dark-heavy">Endereço de e-mail</Text>
+              <TextInput.Root isEmpty={isEmailEmpty} errorMessage="Informe seu email">
                 <TextInput.Icon>
                   <EnvelopeSimple />
                 </TextInput.Icon>
 
-                <TextInput.Input type="email" id="email" placeholder="Digite seu e-mail" onChange={(e) => setEmail(e.target.value)} />
+                <TextInput.Input
+                  type="email"
+                  id="email"
+                  placeholder="Digite seu e-mail"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setIsEmailEmpty(false);
+                  }}
+                  onBlur={(e) => setIsEmailEmpty(isEmptyInput(e.target.value))}
+                />
               </TextInput.Root>
             </label>
 
             <label htmlFor="password">
-              <Text className="font-semibold text-caramel-700">Senha</Text>
-              <TextInput.Root>
+              <Text className="font-semibold text-dark-heavy">Senha</Text>
+              <TextInput.Root isEmpty={isPasswordEmpty} errorMessage="A senha deve possuir no mínimo 6 dígitos">
                 <TextInput.Icon>
-                  <Lock />
+                  <LockKey />
                 </TextInput.Icon>
 
-                <TextInput.Input type="password" id="password" placeholder="Digite sua senha" onChange={(e) => setPassword(e.target.value)} />
+                <TextInput.Input
+                  type="password"
+                  id="password"
+                  placeholder="Digite sua senha"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setIsPasswordEmpty(false);
+                  }}
+                  onBlur={(e) => setIsPasswordEmpty(isEmptyInput(e.target.value))}
+                />
               </TextInput.Root>
             </label>
 
-            <Button.Primary type="submit">Criar conta</Button.Primary>
+            <Button.Primary type="submit" loading={isLoading}>
+              Criar conta
+            </Button.Primary>
           </form>
         </div>
-        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-caramel-200-tp">
+        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-gradient-to-r from-secondary to-primary">
           <SignupImage />
         </div>
       </div>
