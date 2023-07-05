@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 function Signup(): JSX.Element {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="751.57" height="539.42" viewBox="0 0 751.57 539.42">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="40%" viewBox="0 0 751.57 539.42">
       <path
         d="m19.9,538.23c0,.66.53,1.19,1.19,1.19h729.29c.66,0,1.19-.53,1.19-1.19s-.53-1.19-1.19-1.19H21.09c-.66,0-1.19.53-1.19,1.19Z"
         fill="#3f3d58"

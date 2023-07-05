@@ -39,11 +39,11 @@ export function Register() {
   }
 
   if (signed) {
-    return <Navigate to={ROUTES.HOME} />;
+    return <Navigate to={ROUTES.NOTES} />;
   } else {
     return (
       <div className="flex h-screen w-screen">
-        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-background-clearLight">
+        <div className="flex h-screen w-full flex-col items-center justify-center bg-background-clearLight px-7 md:w-1/2">
           <Logo />
           <header className="mt-8 max-w-sm">
             <Text className="text-dark-heavy">Para criar sua conta é necessário preencher as segiuntes informações:</Text>
@@ -94,7 +94,7 @@ export function Register() {
             </Button.Primary>
           </form>
         </div>
-        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-gradient-to-r from-secondary to-primary">
+        <div className="hidden h-screen flex-col items-center justify-center bg-gradient-to-r from-secondary to-primary md:flex md:w-1/2">
           <SignupImage />
         </div>
       </div>

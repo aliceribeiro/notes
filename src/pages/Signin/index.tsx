@@ -51,10 +51,10 @@ export function Signin() {
   } else {
     return (
       <div className="flex h-screen w-screen">
-        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-gradient-to-r from-primary to-secondary">
+        <div className="hidden h-screen w-1/2 flex-col items-center justify-center bg-gradient-to-r from-primary to-secondary  md:flex md:w-1/2">
           <LoginImage />
         </div>
-        <div className="flex h-screen w-1/2 flex-col items-center justify-center bg-background-clearLight">
+        <div className="flex h-screen w-full flex-col items-center justify-center bg-background-clearLight px-7 md:w-1/2">
           <Logo />
           <header className="mt-8 max-w-sm">
             <Text className="text-dark-heavy">Insira as informações que você cadastrou ao se registrar na plataforma.</Text>
@@ -102,9 +102,9 @@ export function Signin() {
             </label>
 
             <Text asChild size="sm" className="mb-6 text-end">
-              <a href="#" className="text-dark-heavy underline hover:text-secondary">
+              <Link to={ROUTES.PASSWORD_RECOVERY} className="text-dark-heavy underline hover:text-secondary">
                 Esqueceu a senha?
-              </a>
+              </Link>
             </Text>
 
             <Button.Primary type="submit" loading={isLoading}>
