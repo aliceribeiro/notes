@@ -9,6 +9,7 @@ import { Separator } from "../../components/Separator";
 import { AuthContext, Note } from "../../contexts/auth";
 import { deleteNoteFromFirestore } from "../../services/notes";
 import clsx from "clsx";
+import { Empty } from "../../components/Empty";
 
 export function Notes() {
   const { notes } = useContext(AuthContext);
@@ -30,7 +31,7 @@ export function Notes() {
 
   return (
     <div className="flex h-full">
-      <div className="mr-1 w-96 overflow-y-hidden scrollbar-thin scrollbar-track-feedback-grayLight scrollbar-thumb-gray-600 hover:overflow-y-auto">
+      <div className="scrollbar-thumb-gray-600 mr-1 w-96 overflow-y-hidden scrollbar-thin scrollbar-track-feedback-grayLight hover:overflow-y-auto">
         <Heading size="lg" className="text-caramel-700">
           Minhas notas
         </Heading>
@@ -43,12 +44,11 @@ export function Notes() {
           }}
         />
 
-        <div className="over mt-8 flex flex-wrap gap-4 pr-8">
-          {notes.length === 0 ? (
-            // TODO: criar tela para conteúdo vazio
-            <p>Sem notas</p>
-          ) : (
-            <>
+        {notes.length === 0 ? (
+          <Empty description="Você ainda não possui nenhuma nota" />
+        ) : (
+          <>
+            <div className="over mx mt-8 flex flex-wrap gap-4 pr-8">
               {notes.map((note, index) => {
                 return (
                   <Card
@@ -68,37 +68,37 @@ export function Notes() {
                   />
                 );
               })}
-            </>
-          )}
-        </div>
-      </div>
-      {newNote && (
-        <div className="w-full border-l-2 border-gray-700 pl-8 pr-8">
-          <NewNotes handleCancel={() => setNewNote(false)} />
-        </div>
-      )}
-      {noteClicked && showClickedNote && (
-        <div className="w-full border-l-2 border-gray-700 pl-8">
-          <div className="w-full">
-            <Text size="lg" className="flex items-center gap-2 font-bold">
-              {"Minhas notas"} <CaretRight />
-              {noteClicked.title}
-            </Text>
-            <Separator.Line />
-            <div className="mt-8">
-              <Card
-                key={noteClicked.title}
-                title={noteClicked.title}
-                date={noteClicked.lastUpdate}
-                categories={noteClicked.categories}
-                text={noteClicked.note}
-                handleClick={() => setNoteClicked(noteClicked)}
-                handleDelete={() => deleteNote(clickedNoteIndex)}
-              />
             </div>
-          </div>
-        </div>
-      )}
+            {newNote && (
+              <div className="border-gray-700 w-full border-l-2 pl-8 pr-8">
+                <NewNotes handleCancel={() => setNewNote(false)} />
+              </div>
+            )}
+            {noteClicked && showClickedNote && (
+              <div className="border-gray-700 w-full border-l-2 pl-8">
+                <div className="w-full">
+                  <Text size="lg" className="flex items-center gap-2 font-bold">
+                    {"Minhas notas"} <CaretRight />
+                    {noteClicked.title}
+                  </Text>
+                  <Separator.Line />
+                  <div className="mt-8">
+                    <Card
+                      key={noteClicked.title}
+                      title={noteClicked.title}
+                      date={noteClicked.lastUpdate}
+                      categories={noteClicked.categories}
+                      text={noteClicked.note}
+                      handleClick={() => setNoteClicked(noteClicked)}
+                      handleDelete={() => deleteNote(clickedNoteIndex)}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }
