@@ -4,6 +4,7 @@ import { ROUTES } from "../../helpers/routes";
 import { Sidebar } from "../../components/Sidebar";
 import { AuthContext } from "../../contexts/auth";
 import { Notes } from "../Notes";
+import { Loading } from "../../components/Loading";
 
 export function Home() {
   const { fetchUserData, logout } = useContext(AuthContext);
@@ -27,12 +28,11 @@ export function Home() {
   return (
     <>
       {isLoading ? (
-        // TODO: adicionar loading
-        <p>Carregando...</p>
+        <Loading />
       ) : (
         <div className="flex h-screen w-screen">
           <Sidebar username={userName.displayName} handleExit={logout} />
-          <div className="w-full bg-feedback-graySoft  p-8">{pathname === ROUTES.NOTES ? <Notes /> : <Outlet />}</div>
+          <div className="w-full bg-feedback-graySoft p-8">{pathname === ROUTES.NOTES ? <Notes /> : <Outlet />}</div>
         </div>
       )}
     </>
