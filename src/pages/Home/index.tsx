@@ -5,6 +5,7 @@ import { Sidebar } from "../../components/Sidebar";
 import { AuthContext } from "../../contexts/auth";
 import { Notes } from "../Notes";
 import { Loading } from "../../components/Loading";
+import { SidebarToggle } from "../../components/SidebarToggle";
 
 export function Home() {
   const { fetchUserData, logout } = useContext(AuthContext);
@@ -30,10 +31,13 @@ export function Home() {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="flex h-screen w-screen">
-          <Sidebar username={userName.displayName} handleExit={logout} />
-          <div className="w-full bg-feedback-graySoft p-8">{pathname === ROUTES.NOTES ? <Notes /> : <Outlet />}</div>
-        </div>
+        <>
+          <SidebarToggle />
+          <div className="flex h-screen w-screen">
+            <Sidebar username={userName.displayName} handleExit={logout} />
+            <div className="w-full bg-feedback-graySoft p-8">{pathname === ROUTES.NOTES ? <Notes /> : <Outlet />}</div>
+          </div>
+        </>
       )}
     </>
   );

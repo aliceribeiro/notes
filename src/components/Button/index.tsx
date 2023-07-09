@@ -13,6 +13,7 @@ export interface LinkButtonProps {
   icon: ReactElement;
   label: string;
   handleClick: () => void;
+  className?: string;
 }
 
 function ButtonRoot({ children, asChild, className, ...props }: ButtonProps) {
@@ -69,11 +70,15 @@ function ButtonSecondary({ children, asChild, className, ...props }: ButtonProps
 
 ButtonSecondary.displayName = "Button.Secondary";
 
-function LinkButton({ icon, label, handleClick: onClick }: LinkButtonProps) {
+function LinkButton({ icon, label, handleClick, className }: LinkButtonProps) {
   return (
     <div
-      className="my-1 flex cursor-pointer items-center gap-2 rounded px-2 py-1 ring-primary transition-colors hover:bg-primary focus:ring-2"
-      onClick={onClick}
+      className={clsx(
+        "my-1 flex cursor-pointer items-center gap-2 rounded px-2 py-1 ring-primary transition-colors " +
+          "hover:bg-background-clearSoft focus:ring-2",
+        className
+      )}
+      onClick={handleClick}
     >
       <>{icon}</>
       <span>{label}</span>
