@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { EnvelopeSimple, GoogleLogo, LockKey } from "phosphor-react";
+import { EnvelopeSimple, Eye, EyeSlash, GoogleLogo, LockKey } from "phosphor-react";
 import { Button } from "../../components/Button";
 import { TextInput } from "../../components/TextInput";
 import { Text } from "../../components/Text";
@@ -21,6 +21,7 @@ export function Signin() {
   const [isEmailEmpty, setIsEmailEmpty] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const [isPasswordEmpty, setIsPasswordEmpty] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function handleSubmit(e: FormEvent) {
@@ -89,7 +90,7 @@ export function Signin() {
                 </TextInput.Icon>
 
                 <TextInput.Input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder="Digite sua senha"
                   onChange={(e) => {
@@ -98,6 +99,12 @@ export function Signin() {
                   }}
                   onBlur={(e) => setIsPasswordEmpty(isEmptyInput(e.target.value))}
                 />
+
+                <TextInput.Icon>
+                  <div onClick={() => setShowPassword(!showPassword)} className="cursor-pointer">
+                    {showPassword ? <EyeSlash size={24} /> : <Eye size={24} />}
+                  </div>
+                </TextInput.Icon>
               </TextInput.Root>
             </label>
 
