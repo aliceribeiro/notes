@@ -9,7 +9,7 @@ export function Empty({ description }: EmptyProps) {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <EmptyImage />
-      <Text>{description}</Text>
+      <Text className="mt-4 text-primary">{description}</Text>
     </div>
   );
 }

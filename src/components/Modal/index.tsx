@@ -32,7 +32,7 @@ export interface ModalDialogProps extends ModalDefaultProps {
 function ModalDialog({ title, description, children, submitBtnText, handleSubmit }: ModalDialogProps) {
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-black-light" />
+      <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-background-darkLight" />
       <Dialog.Content
         className={clsx(
           "data-[state=open]:animate-contentShow fixed left-[50%] top-[50%] max-h-[85vh] w-[90vw] max-w-[450px] " +
@@ -41,7 +41,7 @@ function ModalDialog({ title, description, children, submitBtnText, handleSubmit
         )}
       >
         <Dialog.Title className="text-md">{title}</Dialog.Title>
-        <Dialog.Description className="mb-5 mt-3 text-sm leading-normal text-gray-700">{description}</Dialog.Description>
+        <Dialog.Description className="mb-5 mt-3 text-sm leading-normal text-gray-heavy">{description}</Dialog.Description>
         <div>{children}</div>
         <div className="mt-6 flex justify-end">
           <Dialog.Close asChild>
@@ -109,7 +109,7 @@ function ModalFeedback({ title, description, showCloseBtn, showIcon, type }: Mod
 
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-black-light" />
+      <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-background-darkLight" />
       <Dialog.Content
         className={clsx(
           "data-[state=open]:animate-contentShow fixed left-[50%] top-[50%] max-h-[85vh] w-[90vw] max-w-[450px] " +
@@ -120,7 +120,7 @@ function ModalFeedback({ title, description, showCloseBtn, showIcon, type }: Mod
         <div className="flex min-h-[150px] flex-col items-center justify-evenly">
           {showIcon && <>{iconContent(type)}</>}
           <Dialog.Title className="text-md">{title}</Dialog.Title>
-          <Dialog.Description className="text-center text-sm leading-normal text-gray-700">{description}</Dialog.Description>
+          <Dialog.Description className="text-center text-sm leading-normal text-gray-heavy">{description}</Dialog.Description>
         </div>
 
         {showCloseBtn && (
@@ -151,7 +151,7 @@ export interface ModalAlertProps extends ModalDefaultProps {
 function ModalAlert({ title, description, cancelBtnText, submitBtnText }: ModalAlertProps) {
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-black-light" />
+      <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-background-darkLight" />
       <Dialog.Content
         className={clsx(
           "data-[state=open]:animate-contentShow fixed left-[50%] top-[50%] max-h-[85vh] w-[90vw] max-w-[450px] " +
@@ -160,7 +160,7 @@ function ModalAlert({ title, description, cancelBtnText, submitBtnText }: ModalA
         )}
       >
         <Dialog.Title className="text-md">{title}</Dialog.Title>
-        <Dialog.Description className="mb-5 mt-3 text-sm leading-normal text-gray-700">{description}</Dialog.Description>
+        <Dialog.Description className="mb-5 mt-3 text-sm leading-normal text-gray-heavy">{description}</Dialog.Description>
         <div className="mt-6 flex justify-end gap-6">
           <Dialog.Close asChild>
             <button

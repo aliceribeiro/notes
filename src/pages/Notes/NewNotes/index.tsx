@@ -33,9 +33,11 @@ export function NewNotes({ handleCancel }: NewNotesProps) {
   }
 
   function addCategory() {
-    const newCategory = [...categories];
-    newCategory.push(currentCategory);
-    setCategories(newCategory);
+    if (currentCategory) {
+      const newCategory = [...categories];
+      newCategory.push(currentCategory);
+      setCategories(newCategory);
+    }
   }
 
   function removeCategory(index: number) {
@@ -50,12 +52,12 @@ export function NewNotes({ handleCancel }: NewNotesProps) {
         triggerBtn={
           <div
             className={clsx(
-              "my-1 flex cursor-pointer items-center gap-2 rounded bg-feedback-graySoft " +
-                "px-2 py-1 ring-caramel-700 transition-colors hover:bg-feedback-grayLight focus:ring-2"
+              "my-1 flex cursor-pointer items-center gap-2 rounded bg-feedback-graySoft px-2 py-1 text-gray-heavy " +
+                "transition-colors hover:bg-feedback-grayLight"
             )}
           >
             <Plus size={16} />
-            <p>Adicionar categoria</p>
+            <Text size="sm">Adicionar categoria</Text>
           </div>
         }
       >
@@ -75,17 +77,17 @@ export function NewNotes({ handleCancel }: NewNotesProps) {
 
   return (
     <div className="h-full">
-      <Text size="lg" className="flex items-center gap-2 font-bold">
+      <Text size="lg" className="flex items-center gap-2 font-bold text-dark-soft">
         {"Minhas notas"} <CaretRight />
         {"Nova nota"}
       </Text>
       <Separator.Line />
-      <Heading className="mt-4 text-caramel-700">Adicionar nova nota</Heading>
+      <Heading className="mt-4 text-dark-soft">Adicionar nova nota</Heading>
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3">
         <div className="flex flex-wrap gap-4">
           {categories.map((category, index) => {
             return (
-              <Tag key={index} className="text-caramel-700">
+              <Tag key={index} className="text-gray-heavy">
                 <div className="flex items-center gap-3">
                   {category}
                   <div

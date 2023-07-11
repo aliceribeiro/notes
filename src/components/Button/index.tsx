@@ -75,7 +75,7 @@ function LinkButton({ icon, label, handleClick, className }: LinkButtonProps) {
     <div
       className={clsx(
         "my-1 flex cursor-pointer items-center gap-2 rounded px-2 py-1 ring-primary transition-colors " +
-          "hover:bg-background-clearSoft focus:ring-2",
+          "text-secondary hover:bg-background-clearSoft focus:ring-2",
         className
       )}
       onClick={handleClick}

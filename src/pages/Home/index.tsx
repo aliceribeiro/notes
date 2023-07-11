@@ -35,7 +35,7 @@ export function Home() {
           <SidebarToggle />
           <div className="flex h-screen w-screen">
             <Sidebar username={userName.displayName} handleExit={logout} />
-            <div className="w-full bg-feedback-graySoft p-8">{pathname === ROUTES.NOTES ? <Notes /> : <Outlet />}</div>
+            {pathname === ROUTES.NOTES ? <Notes /> : <Outlet />}
           </div>
         </>
       )}
