@@ -1,0 +1,2 @@
+import{T as t}from"./index-5e06b9a6.js";import"./clsx.m-51e04ab1.js";import"./index-8db94870.js";import"./_commonjsHelpers-042e6b4d.js";const n={title:"Components/Tag",component:t,args:{children:"Pessoal"}},r={};var e,o,s;r.parameters={...r.parameters,docs:{...(e=r.parameters)==null?void 0:e.docs,source:{originalSource:"{}",...(s=(o=r.parameters)==null?void 0:o.docs)==null?void 0:s.source}}};const i=["Default"];export{r as Default,i as __namedExportsOrder,n as default};
+//# sourceMappingURL=Tag.stories-b9bedb45.js.map

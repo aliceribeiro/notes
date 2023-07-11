@@ -1,0 +1,2 @@
+import{j as s,c as t}from"./clsx.m-51e04ab1.js";function a({children:e,className:r}){return s.jsx("div",{className:t("flex items-center gap-1 rounded bg-feedback-graySoft px-2 py-1",r),children:e})}try{a.displayName="Tag",a.__docgenInfo={description:"",displayName:"Tag",props:{className:{defaultValue:null,description:"",name:"className",required:!1,type:{name:"string"}}}}}catch{}export{a as T};
+//# sourceMappingURL=index-5e06b9a6.js.map

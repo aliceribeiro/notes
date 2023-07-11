@@ -1,0 +1,6 @@
+import{j as a,c as d}from"./clsx.m-51e04ab1.js";import{_ as v}from"./extends-98964cd2.js";import{r as c}from"./index-8db94870.js";import{$ as N}from"./index-37144071.js";const s="horizontal",S=["horizontal","vertical"],f=c.forwardRef((e,r)=>{const{decorative:o,orientation:t=s,...n}=e,i=l(t)?t:s,m=o?{role:"none"}:{"aria-orientation":i==="vertical"?i:void 0,role:"separator"};return c.createElement(N.div,v({"data-orientation":i},m,n,{ref:r}))});f.propTypes={orientation(e,r,o){const t=e[r],n=String(t);return t&&!l(t)?new Error(h(n,o)):null}};function h(e,r){return`Invalid prop \`orientation\` of value \`${e}\` supplied to \`${r}\`, expected one of:
+  - horizontal
+  - vertical
+
+Defaulting to \`${s}\`.`}function l(e){return S.includes(e)}const y=f;function $({children:e}){return a.jsx("div",{children:e})}$.displayName="Separator.Root";function u({className:e}){return a.jsx(y,{className:d("h-[1px] w-full bg-gray-heavy",e)})}u.displayName="Separator.Line";function x({text:e,className:r}){return a.jsxs("div",{className:d("flex items-center",r),children:[a.jsx(p.Line,{}),a.jsx("span",{className:"text-gray-bg-gray-heavy px-2",children:e}),a.jsx(p.Line,{})]})}x.displayName="Separator.Line";const p={Root:$,Line:u,Text:x};export{p as S};
+//# sourceMappingURL=index-4bb0ac3b.js.map
