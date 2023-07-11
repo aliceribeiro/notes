@@ -6,9 +6,9 @@
   <img src="https://i.imgur.com/CApb5Y6.png">
 </div>
 
-<!-- <div align="center">
+<div align="center">
   <a href="https://notes-e0831.web.app/">Acessar plataforma</a>
-</div> -->
+</div>
 
 # 📑 Index
 
@@ -20,9 +20,9 @@
 
 ## 💻 Projeto
 
-O **notes** é uma plataforma simples e prática para fazer anotações. Com o **notes**, você criar uma conta ou fazer login utilizando suas contas do Google ou através de um e-mail e senha. Após o login, você pode criar, editar e excluir anotações.
+O **notas** é uma plataforma simples e prática para fazer anotações. Com o **notas**, você criar uma conta ou fazer login utilizando suas contas do Google ou através de um e-mail e senha. Após o login, você pode criar, editar e excluir anotações.
 
-Os dados gerados são armazenadas no Firestore. A interface do **notes** é desenvolvida com o auxílio do Tailwind CSS, que facilita a criação de estilos responsivos e personalizados. Além disso, também foi utilizado o Storybook para construir e testar componentes de forma isolada, garantindo a reutilização e manutenção eficiente do código.
+Os dados gerados são armazenadas no Firestore. A interface do **notas** é desenvolvida com o auxílio do Tailwind CSS, que facilita a criação de estilos responsivos e personalizados. Além disso, também foi utilizado o Storybook para construir e testar componentes de forma isolada, garantindo a reutilização e manutenção eficiente do código.
 
 ---
 
