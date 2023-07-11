@@ -4,9 +4,9 @@ import { Separator } from "../../../components/Separator";
 import { Text } from "../../../components/Text";
 import { TextInput } from "../../../components/TextInput";
 import { Button } from "../../../components/Button";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../contexts/auth";
+import { AuthContext, db } from "../../../contexts/auth";
 import { Tag } from "../../../components/Tag";
 import { Modal } from "../../../components/Modal";
 import clsx from "clsx";
@@ -16,6 +16,8 @@ interface NewNotesProps {
 }
 
 export function NewNotes({ handleCancel }: NewNotesProps) {
+  const { fetchUserData } = useContext(AuthContext);
+
   const [categories, setCategories] = useState<string[]>([]);
   const [currentCategory, setCurrentCategory] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -29,7 +31,14 @@ export function NewNotes({ handleCancel }: NewNotesProps) {
 
     await updateDoc(doc(db, "users", userId), {
       notes: arrayUnion(newData)
-    });
+    })
+      .then(() => {
+        alert("Nota criada com sucesso!");
+        fetchUserData();
+      })
+      .catch((error) => {
+        throw new Error("Não foi possível criar nota", error);
+      });
   }
 
   function addCategory() {

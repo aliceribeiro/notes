@@ -1,7 +1,7 @@
 import { Button } from "../Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSidebar } from "../../contexts/sidebar";
-import { CaretLeft, CheckSquare, Note, SignOut } from "phosphor-react";
+import { CaretLeft, Note, SignOut } from "phosphor-react";
 import { BaseRoutes, ROUTES } from "../../helpers/routes";
 import { Separator } from "../Separator";
 import { Heading } from "../Heading";
@@ -46,12 +46,12 @@ export function Sidebar({ username, handleExit }: SidebarProps) {
               handleClick={() => navigateToPage(ROUTES.NOTES)}
               className={clsx({ "font-bold text-primary": currentLocation === ROUTES.NOTES })}
             />
-            <Button.Link
+            {/* <Button.Link
               icon={<CheckSquare size={24} />}
               label="To-do list"
               handleClick={() => navigateToPage(ROUTES.TODO_LIST)}
               className={clsx({ "font-bold text-primary": currentLocation === ROUTES.TODO_LIST })}
-            />
+            /> */}
           </div>
           <div>
             <Separator.Line />

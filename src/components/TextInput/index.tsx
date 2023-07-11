@@ -7,13 +7,14 @@ export interface TextInputRootProps {
   children: ReactNode;
   isEmpty?: boolean;
   errorMessage?: string;
+  className?: string;
 }
 
 function TextInputRoot(props: TextInputRootProps) {
   return (
     <>
       <div
-        className={clsx("flex h-12 w-full items-center gap-3 rounded bg-feedback-graySoft px-3 py-3 ring-primary focus-within:ring-2", {
+        className={clsx("flex h-12 w-full items-center gap-3 rounded bg-gray-light px-3 py-3 ring-primary focus-within:ring-2", {
           "border-2 border-feedback-error ring-feedback-error focus-within:ring-transparent": props.isEmpty === true
         })}
       >
@@ -54,7 +55,7 @@ function TextAreaInput(props: TextAreaProps) {
   return (
     <textarea
       rows={7}
-      className="placeholder:text-gray w-full flex-1 rounded bg-feedback-graySoft p-3 text-dark-heavy outline-none ring-primary focus-within:ring-2"
+      className="placeholder:text-gray w-full flex-1 rounded bg-gray-light p-3 text-dark-heavy outline-none ring-primary focus-within:ring-2"
       {...props}
     />
   );

@@ -20,20 +20,20 @@ export function Card({ title, date, categories, text, handleClick, handleDelete,
   const formattedDate = date ? format(new Date(date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR }) : "Sem data informada";
 
   return (
-    <div className={clsx("w-72 truncate rounded bg-feedback-grayLight p-4", className)} onClick={handleClick}>
-      <div className="flex items-center justify-between text-caramel-700">
-        <Heading>{title}</Heading>
+    <div className={clsx("w-72 truncate rounded bg-[#ffffff5d] p-4", className)} onClick={handleClick}>
+      <div className="flex items-center justify-between text-primary">
+        <Heading size="sm">{title}</Heading>
         <Trash size={24} onClick={handleDelete} className="cursor-pointer" />
       </div>
-      <Text size="sm" className="text-gray-700">
+      <Text size="sm" className="text-gray-heavy">
         {formattedDate}
       </Text>
-      <div className="flex items-center gap-2 py-2 text-caramel-700">
+      <div className="flex items-center gap-2 py-2 text-primary">
         {categories.map((category, index) => {
           return <Tag key={index}>{category}</Tag>;
         })}
       </div>
-      <Text className="text-black-600">{text}</Text>
+      <Text className="text-dark-soft">{text}</Text>
     </div>
   );
 }

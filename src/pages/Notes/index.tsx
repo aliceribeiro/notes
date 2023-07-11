@@ -29,8 +29,12 @@ export function Notes() {
 
   return (
     <div className="flex w-full bg-background-clearSoft p-8">
-      <div className="min-w-fit">
-        <Heading size="lg" className="text-dark-soft">
+      <div
+        className={clsx(
+          "scrollbar-thumb-gray-600 mr-1 min-w-fit overflow-y-hidden scrollbar-thin scrollbar-track-feedback-grayLight hover:overflow-y-auto"
+        )}
+      >
+        <Heading size="lg" className="text-primary">
           Minhas notas
         </Heading>
         <div
@@ -38,7 +42,7 @@ export function Notes() {
             setNewNote(true);
             setShowClickedNote(false);
           }}
-          className="mt-1 flex cursor-pointer items-center gap-2 rounded p-1 text-dark-soft hover:bg-feedback-grayLight"
+          className="mt-1 flex cursor-pointer items-center gap-2 rounded p-1 text-primary hover:bg-feedback-grayLight"
         >
           <Plus size={24} />
           <Text>Nova nota</Text>
@@ -51,7 +55,8 @@ export function Notes() {
             </Text>
           </div>
         )}
-        <div className="over mx mt-8 flex flex-wrap gap-4 pr-8">
+
+        <div className={clsx("over mx mt-8 flex flex-wrap gap-4 pr-8", { "flex-col": newNote || showClickedNote === true })}>
           {notes.map((note, index) => {
             return (
               <Card
